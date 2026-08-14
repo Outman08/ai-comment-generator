@@ -11,5 +11,7 @@ export default defineConfig({
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+    // 部署到 Vercel：让 nitro 输出 Vercel Functions 格式（默认是 cloudflare）
+    nitro: { preset: "vercel" },
   },
 });
