@@ -1,0 +1,44 @@
+import { createServerFn } from "@tanstack/react-start";
+import { generateText } from "ai";
+import { z } from "zod";
+
+const Input = z.object({
+  post: z.string().min(1).max(4000),
+  tone: z.string().min(1).max(40),
+  platform: z.string().min(1).max(40),
+  intent: z.string().min(1).max(60),
+});
+
+const Schema = z.object({
+  comments: z.array(z.string()),
+});
+
+
+export const generateComments = createServerFn({ method: "POST" })
+  .inputValidator((input: unknown) => Input.parse(input))
+  .handler(async ({ data }) => {
+    const key = process.env["LOVABLE_API_KEY"];
+    if (!key) throw new Error("AI is not configured yet.");
+
+    const { createLovableAiGatewayProvider } = await import("./ai-gateway.server");
+    const gateway = createLovableAiGatewayProvider(key);
+
+    const result = await generateText({
+      model: gateway("google/gemini-3.6-flash"),
+      system:
+        "You write social media comments that sound human. Never use empty praise like 'Great post!'. Reference a specific idea from the original post, add a genuine perspective, and match the culture of the target platform. No hashtags unless the platform expects them. Return exactly three distinct comments, not three rewordings. Respond with ONLY a JSON object of the form {\"comments\":[\"...\",\"...\",\"...\"]} and no markdown fences.",
+      prompt: `Original post to reply to:\n"""${data.post}"""\n\nPlatform: ${data.platform}\nTone: ${data.tone}\nComment type: ${data.intent}\n\nWrite 3 distinct comment options.`,
+    });
+
+    const raw = result.text.trim().replace(/^```(?:json)?/i, "").replace(/```$/, "");
+    const start = raw.indexOf("{");
+    const end = raw.lastIndexOf("}");
+    const parsed = Schema.safeParse(
+      JSON.parse(start >= 0 && end > start ? raw.slice(start, end + 1) : raw),
+    );
+    if (!parsed.success || parsed.data.comments.length === 0) {
+      throw new Error("The AI returned an unexpected response. Please try again.");
+    }
+    return { comments: parsed.data.comments.slice(0, 3) };
+  });
+
