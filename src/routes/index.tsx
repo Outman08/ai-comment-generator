@@ -65,7 +65,6 @@ const STEPS = [
   },
 ];
 
-
 const FAQS = [
   {
     q: "Is the AI comment generator free to try?",
@@ -214,9 +213,7 @@ function CommentGenerator() {
           </div>
 
           <div className="mx-auto mt-12 max-w-4xl rounded-3xl border border-border bg-card p-6 shadow-card sm:p-8">
-            <h2 className="text-center text-xl font-medium">
-              What post do you want to reply to?
-            </h2>
+            <h2 className="text-center text-xl font-medium">What post do you want to reply to?</h2>
             <textarea
               value={post}
               onChange={(e) => setPost(e.target.value)}
@@ -226,12 +223,7 @@ function CommentGenerator() {
             />
 
             <ChipRow label="Tone" options={TONES} value={tone} onChange={setTone} />
-            <ChipRow
-              label="Comment type"
-              options={INTENTS}
-              value={intent}
-              onChange={setIntent}
-            />
+            <ChipRow label="Comment type" options={INTENTS} value={intent} onChange={setIntent} />
 
             <button
               onClick={() => mutation.mutate()}
@@ -267,11 +259,7 @@ function CommentGenerator() {
                         aria-label="Copy comment"
                         className="shrink-0 rounded-lg border border-border bg-card p-2 text-muted-foreground transition hover:text-foreground"
                       >
-                        {copied === i ? (
-                          <Check className="size-4" />
-                        ) : (
-                          <Copy className="size-4" />
-                        )}
+                        {copied === i ? <Check className="size-4" /> : <Copy className="size-4" />}
                       </button>
                     </div>
                   </div>
@@ -331,11 +319,15 @@ function CommentGenerator() {
               For example, imagine you're responding to a post about five lessons someone learned
               while building their first business.
             </p>
-            <p className="mt-4 leading-relaxed text-muted-foreground">A generic comment might be:</p>
+            <p className="mt-4 leading-relaxed text-muted-foreground">
+              A generic comment might be:
+            </p>
             <div className="mt-3 rounded-2xl border border-border bg-surface p-4 text-sm leading-relaxed text-muted-foreground">
               Great post! 🔥
             </div>
-            <p className="mt-4 leading-relaxed text-muted-foreground">A more meaningful comment could be:</p>
+            <p className="mt-4 leading-relaxed text-muted-foreground">
+              A more meaningful comment could be:
+            </p>
             <div className="mt-3 rounded-2xl border border-border bg-surface p-4 text-sm leading-relaxed text-muted-foreground">
               The point about talking to customers before building really stands out. It's easy to
               spend months solving a problem people don't actually have.
@@ -349,9 +341,7 @@ function CommentGenerator() {
               quickly, rather than filling comment sections with generic responses.
             </p>
 
-            <h3 className="mt-12 text-[22px] font-semibold">
-              How to Use the AI Comment Generator
-            </h3>
+            <h3 className="mt-12 text-[22px] font-semibold">How to Use the AI Comment Generator</h3>
             <p className="mt-3 leading-relaxed text-muted-foreground">
               Creating a comment with GeeLark takes just a few steps.
             </p>
@@ -385,7 +375,16 @@ function CommentGenerator() {
               Depending on the situation, you might choose a tone such as:
             </p>
             <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-              {["Friendly", "Professional", "Casual", "Funny", "Supportive", "Curious", "Enthusiastic", "Thoughtful"].map((t) => (
+              {[
+                "Friendly",
+                "Professional",
+                "Casual",
+                "Funny",
+                "Supportive",
+                "Curious",
+                "Enthusiastic",
+                "Thoughtful",
+              ].map((t) => (
                 <li key={t} className="flex gap-2 text-sm leading-relaxed text-muted-foreground">
                   <Check className="mt-0.5 size-4 shrink-0 text-brand" />
                   <span>{t}</span>
@@ -429,7 +428,9 @@ function CommentGenerator() {
               discussion.
             </p>
 
-            <h3 className="mt-12 text-[22px] font-semibold">How to Write a Good Social Media Comment</h3>
+            <h3 className="mt-12 text-[22px] font-semibold">
+              How to Write a Good Social Media Comment
+            </h3>
             <p className="mt-3 leading-relaxed text-muted-foreground">
               The best comments usually feel like part of a conversation rather than a piece of
               promotion.
@@ -578,12 +579,16 @@ function CommentGenerator() {
               That sunrise view alone looks worth the early wake-up 😍 Was this crowded when you
               went?
             </div>
-            <p className="mt-4 leading-relaxed text-muted-foreground">For an educational carousel:</p>
+            <p className="mt-4 leading-relaxed text-muted-foreground">
+              For an educational carousel:
+            </p>
             <div className="mt-3 rounded-2xl border border-border bg-surface p-4 text-sm leading-relaxed text-muted-foreground">
               Slide 4 is such an important point. It's easy to focus on posting more when improving
               the actual message might make a bigger difference.
             </div>
-            <p className="mt-4 leading-relaxed text-muted-foreground">For a product announcement:</p>
+            <p className="mt-4 leading-relaxed text-muted-foreground">
+              For a product announcement:
+            </p>
             <div className="mt-3 rounded-2xl border border-border bg-surface p-4 text-sm leading-relaxed text-muted-foreground">
               The new design looks clean 👏 Curious to see how the new workflow works in practice.
             </div>
@@ -669,7 +674,9 @@ function CommentGenerator() {
             <div className="mt-3 rounded-2xl border border-border bg-surface p-4 text-sm leading-relaxed text-muted-foreground">
               These look amazing! Is the seasonal menu available all month?
             </div>
-            <p className="mt-4 leading-relaxed text-muted-foreground">For a community discussion:</p>
+            <p className="mt-4 leading-relaxed text-muted-foreground">
+              For a community discussion:
+            </p>
             <div className="mt-3 rounded-2xl border border-border bg-surface p-4 text-sm leading-relaxed text-muted-foreground">
               We tried something similar last year. Starting with a smaller group made organizing
               everything much easier before opening it up to everyone.
@@ -711,7 +718,9 @@ function CommentGenerator() {
             <p className="mt-3 rounded-2xl border border-border bg-surface p-4 text-sm leading-relaxed text-muted-foreground">
               Does the comment say everything it needs to say without unnecessary filler?
             </p>
-            <p className="mt-4 leading-relaxed text-muted-foreground">If yes, it's probably long enough.</p>
+            <p className="mt-4 leading-relaxed text-muted-foreground">
+              If yes, it's probably long enough.
+            </p>
 
             <h3 className="mt-12 text-[22px] font-semibold">
               Can AI Generate Replies to Social Media Comments?
@@ -727,7 +736,9 @@ function CommentGenerator() {
               We've been struggling with exactly this. How do you decide which content ideas are
               worth testing?
             </div>
-            <p className="mt-4 leading-relaxed text-muted-foreground">A useful response might be:</p>
+            <p className="mt-4 leading-relaxed text-muted-foreground">
+              A useful response might be:
+            </p>
             <div className="mt-3 rounded-2xl border border-border bg-surface p-4 text-sm leading-relaxed text-muted-foreground">
               We usually start with questions customers are already asking, then prioritize ideas
               that connect those questions to a clear problem we can help solve. It gives us a much
@@ -749,7 +760,9 @@ function CommentGenerator() {
               If a generated comment sounds too generic or robotic, don't just regenerate it
               repeatedly. Give the AI better instructions.
             </p>
-            <p className="mt-4 leading-relaxed text-muted-foreground">Provide information such as:</p>
+            <p className="mt-4 leading-relaxed text-muted-foreground">
+              Provide information such as:
+            </p>
             <ul className="mt-3 space-y-2">
               {[
                 "The original post: What exactly are you responding to?",
@@ -778,7 +791,9 @@ function CommentGenerator() {
               Better context generally leads to more specific comments.
             </p>
 
-            <h3 className="mt-12 text-[22px] font-semibold">Should You Use AI-Generated Comments?</h3>
+            <h3 className="mt-12 text-[22px] font-semibold">
+              Should You Use AI-Generated Comments?
+            </h3>
             <p className="mt-3 leading-relaxed text-muted-foreground">
               AI-generated comments can save time when they're used to help you think and write,
               rather than to imitate genuine engagement at scale.
@@ -818,14 +833,16 @@ function CommentGenerator() {
               ))}
             </ul>
             <p className="mt-4 leading-relaxed text-muted-foreground">
-              If the AI writes, "I tried this last year and it completely changed my business," don't
-              post it unless that's actually true.
+              If the AI writes, "I tried this last year and it completely changed my business,"
+              don't post it unless that's actually true.
             </p>
             <p className="mt-4 leading-relaxed text-muted-foreground">
               AI can help with the words. You remain responsible for what the comment says.
             </p>
 
-            <h3 className="mt-12 text-[22px] font-semibold">Create Social Media Comments in Seconds</h3>
+            <h3 className="mt-12 text-[22px] font-semibold">
+              Create Social Media Comments in Seconds
+            </h3>
             <p className="mt-3 leading-relaxed text-muted-foreground">
               Use the GeeLark AI Comment Generator to create relevant comment ideas without starting
               from a blank box.
@@ -836,8 +853,8 @@ function CommentGenerator() {
               platforms.
             </p>
             <p className="mt-4 leading-relaxed text-muted-foreground">
-              You can generate a quick reaction, thoughtful response, question, professional comment,
-              or casual reply—and then personalize it before posting.
+              You can generate a quick reaction, thoughtful response, question, professional
+              comment, or casual reply—and then personalize it before posting.
             </p>
             <p className="mt-4 leading-relaxed text-muted-foreground">
               The goal isn't to comment more for the sake of commenting. It's to make it easier to
@@ -879,9 +896,7 @@ function CommentGenerator() {
                   className="group flex flex-col justify-between rounded-xl border border-border bg-card p-6 shadow-[var(--shadow-soft)] transition-shadow hover:shadow-[var(--shadow-lift)]"
                 >
                   <div>
-                    <h3 className="text-base font-semibold">
-                      {t.title}
-                    </h3>
+                    <h3 className="text-base font-semibold">{t.title}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                       {t.description}
                     </p>
