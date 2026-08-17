@@ -12,6 +12,17 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
     // 部署到 Vercel：让 nitro 输出 Vercel Functions 格式（默认是 cloudflare）
-    // nitro: { preset: "vercel" },
+    nitro: { preset: "vercel" },
+  },
+  vite: {
+    ssr: {
+      // 强制 Vite 把这些包打包进 SSR bundle，确保模块加载顺序正确
+      // 解决 Vercel 部署时 createMiddleware is not a function 的问题
+      noExternal: [
+        "@tanstack/start-client-core",
+        "@tanstack/start-server-core",
+        "@tanstack/start-fn-stubs",
+      ],
+    },
   },
 });
