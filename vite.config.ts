@@ -12,6 +12,6 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
     // 部署到 Vercel：让 nitro 输出 Vercel Functions 格式（默认是 cloudflare）
-    nitro: { preset: "vercel" },
+    // nitro: { preset: "vercel" },
   },
 });
